@@ -15,6 +15,8 @@ interface State {
 
 class App extends React.Component<Props, State> {
 
+  // * 生命周期第一阶段： 初始化
+  // 初始化
   constructor(props) {
     super(props)
     this.state = {
@@ -22,12 +24,30 @@ class App extends React.Component<Props, State> {
       count: 0
     }
   }
-
+  // 在组件创建好dom元素一行、挂载进页面的时候调用
   componentDidMount() {
     fetch('https://jsonplaceholder.typicode.com/users')
     .then(response => response.json())
     .then(data => this.setState({robotGallery: data}))
   }
+
+  // * 生命周期第二阶段： 更新
+  // 1. componentWillReceiveProps：组件在接收到一个新的 prop （更新后）时被调用
+  // componentWillReceiveProps ---> 已废弃
+
+  // 2. shouldComponentUpdate：通过判断props 和 state 变化来判断组件是否需要更新，返回true 更新、返回false 不更新
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return nextState.some !== this.state.some
+  // }
+
+  // 组件更新后调用
+  componentDidUpdate() {}
+
+  // * 生命周期第三阶段：销毁
+  // 组件销毁后调用
+  // 可以当作析构函数 destructor 来使用
+  componentWillUnmount() {}
+
 
   render() {
     return (
