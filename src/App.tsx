@@ -58,7 +58,7 @@ const App : React.FC = (props)=> {
         <ShoppingCart />
         {!error || error !== "" && <div>网站出错：{error}</div>}
         {!loading ? <div className={styles.robotList}>
-          {robotGallery.map(r => <Robot id={r.id} email={r.email} name={r.name} />)}
+          {robotGallery.map(r => <Robot id={r.id} email={r.email} name={r.name} key={r.id} />)}
         </div>
         : <h2>loading 加载中</h2>
       }
