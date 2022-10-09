@@ -9,6 +9,7 @@ export const withAddToCart = (ChildComponent: React.ComponentType<RobotProps>) =
   // return class extends React.Component {}
   return (props) => {
     const setState = useContext(appStateContext)
+    // 加入购物车事件
     const addToCart = (id, name) => {
       if (setState) {
         setState(state => {
@@ -23,4 +24,22 @@ export const withAddToCart = (ChildComponent: React.ComponentType<RobotProps>) =
     }
     return <ChildComponent {...props} addToCart={addToCart} />
   }
+}
+
+export const useAddToCart = () => {
+  const setState = useContext(appStateContext)
+  // 加入购物车事件
+  const addToCart = (id, name) => {
+    if (setState) {
+      setState(state => {
+        return {
+          ...state,
+          shoppingCart: {
+            items: [...state.shoppingCart.items, { id, name }]
+          }
+        }
+      })
+    }
+  }
+  return addToCart
 }
